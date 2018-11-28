@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-function App() {
+// import { Provider } from './context';
+import Dash from './components/Dash';
+import About from './components/About';
+
+class App extends Component {
+  render() {
     return (
-        <div>
-            <h1>Relayr Device Dashboard</h1>
-            <p>Feel free to implement UI the way you like.</p>
-            <p>You can write styles in ./styles.css.</p>
-        </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Dash} />
+          <Route exact path="/about" component={About} />
+          <Route component={Dash} />
+        </Switch>
+      </Router>
     );
+  }
 }
 
 export default App;
