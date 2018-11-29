@@ -5,10 +5,10 @@ const Context = React.createContext();
 
 const reducer = (state, action) => {
   switch(action.type){
-    case 'SEARCH_TRACKS':
+    case 'GET_DEVICE_READING':
       return {
         ...state,
-        trackList: action.payload,
+        deviceList: action.payload,
         heading: 'Search Result'
       }
     default:
@@ -17,21 +17,23 @@ const reducer = (state, action) => {
 }
 
 export class Provider extends Component {
-  state = {
-    trackList: [],
-    heading: "Top 10 tracks",
-    dispatch: action => this.setState(state => reducer(state, action))
+  constructor() {
+    super();
+    this.state = {
+      deviceList: [],
+      dispatch: action => this.setState(state => reducer(state, action))
+    }
   }
 
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_Cors_Bypass + process.env.REACT_APP_MusicMatch_BaseUrl}chart.tracks.get?page=1&page_size=10&country=nga&f_has_lyrics=1&apikey=${process.env.REACT_APP_MusicMatch_Key}`)
-      .then(result => {
+    axios.get(`${process.env.DEVICE_API_HOST + ':' + process.env.DEVICE_API_PORT}/device`)
+      .then(res => {
         this.setState({
-          trackList: result.data.message.body.track_list
+          deviceList: res.data
         });
       })
       .catch(error => console.log("Error ", error))
-  }
+  };
 
   render() {
     return (
