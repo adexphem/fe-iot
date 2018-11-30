@@ -10,51 +10,57 @@ class Search extends Component {
     this.state = {
       searchTitle: ''
     }
+
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange = (e) => {
-    console.log("dddd", this);
-    event.preventDefault();
+    e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
-  getTrack = (dispatch, e) => {
+  getSearchResult = (dispatch, e) => {
     e.preventDefault();
 
-    axios.get(`${process.env.DEVICE_API_HOST + ':' + process.env.DEVICE_API_PORT}/device`)
-      .then(result => {
-        dispatch({
-          type: 'SEARCH_DEVICE',
-          payload: result.data
-        });
-
-        this.setState({ trackTitle: ''});
-      })
-      .catch(error => console.log("Error ", error))
-  }
+    dispatch({
+      type: 'SEARCH_DATA',
+      payload: this.state.searchTitle,
+    });
+  };
 
   render() {
+    const {activeDevice, inactiveDevice} = this.props;
     return (
       <Consumer>
         {value => {
           const { dispatch } = value;
            return(
-             <div className="section search">
-              <p className="lead text-center title">Filter Device List</p>
-              <form onSubmit={this.getTrack.bind(this, dispatch)}>
-                <div className="form-group">
-                  <input type="text"
-                    ref={this.searchTextRef}
-                    className="form-control form-control-lg form-input"
-                    placeholder="Search devices by name.."
-                    name="searchTitle"
-                    value={this.state.searchTitle}
-                    onChange={this.onChange}/>
-                </div>
-              </form>
-             </div>
+             <React.Fragment>
+               <div className="section search">
+                <p className="lead text-center title">Filter Device List</p>
+                <form onSubmit={this.getSearchResult.bind(this, dispatch)}>
+                  <div className="form-group form-display-control">
+                    <input type="text"
+                      ref={this.searchTextRef}
+                      className="form-control form-control-lg form-input"
+                      placeholder="Search devices by name.."
+                      name="searchTitle"
+                      value={this.state.searchTitle}
+                      onChange={this.onChange}/>
+                      <button className="btn btn-secondary btn-lg btn-block mb-5" type="submit">
+                        Submit
+                      </button>
+                  </div>
+                </form>
+              </div>
+              <div className="device-status-info">
+                <span className="title">Device Status</span>
+                <span className="device-status-orientation active">{activeDevice} <i>Active</i></span>
+                <span className="device-status-orientation inactive">{inactiveDevice} <i>Inactive</i></span>
+              </div>
+             </React.Fragment>
            );
         }}
       </Consumer>

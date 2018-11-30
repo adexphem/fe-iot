@@ -18,8 +18,15 @@ img {
 }
 
 .loading {
-  display: 'block';
-  filter: 'grayscale(80%)';
+  margin: 0 auto;
+  display: block;
+  filter: grayscale(80%);
+}
+
+.spinner .info {
+  text-align: center;
+  color: #cecece;
+  font-size: 12px;
 }
 
 #root .nav {
@@ -39,11 +46,11 @@ img {
 }
 
 .transform5 {
-  transform: skew(-5deg);
+  transform: skew(-3deg);
 }
 
 .transform-5 {
-  transform: skew(5deg);
+  transform: skew(3deg);
 }
 
 .nav .container {
@@ -123,11 +130,71 @@ img {
   max-width: 500px;
   margin: 0 auto;
   margin-top: 30px;
-  margin-bottom: 50px;
 }
 
 .section.search .title {
   font-weight: 600;
+}
+
+.section.search form {
+  height: 60px;
+}
+
+.form-display-control {
+  display: flex;
+  justify-items: center;
+}
+
+.form-display-control input {
+  flex: 2 1;
+}
+
+.form-display-control button {
+  flex: 1 1;
+}
+
+.device-status-info {
+  padding: 5px 0px 24px 0px;
+  border-bottom: 1px solid rgba(243, 169, 169, 0.5);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.device-status-info > * {
+  margin: 0 10px;
+}
+
+.device-status-info .title {
+  font-weight: 400;
+  color: rgb(34, 6, 10);
+}
+
+.device-status-orientation {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 35px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.device-status-orientation i {
+  text-transform: capitalize;
+  font-style: normal;
+  font-size: 10px;
+  display: block;
+  margin-top: -13px;
+}
+
+.active {
+  background-color: greenyellow;
+}
+
+.inactive {
+  background-color: red;
 }
 
 .device-listing .card {

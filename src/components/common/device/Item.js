@@ -3,7 +3,6 @@ import Moment from 'react-moment';
 
 const Item = (props) => {
   const { item } = props;
-  console.log("track  ", item);
   return (
     <div className="col-md-6 transform5">
       <div className="card mb-4">
