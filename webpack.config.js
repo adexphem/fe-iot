@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: {
@@ -17,12 +18,16 @@ module.exports = {
         filename: 'js/[name].js'
     },
     plugins: [
+        new Dotenv({
+            path: './.env', 
+            safe: false 
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: './index.html',
             inject: 'body'
         }),
-        new ExtractTextPlugin('css/[name].css')
+        new ExtractTextPlugin('css/[name].css'),
     ],
     module: {
         rules: [{
@@ -34,6 +39,16 @@ module.exports = {
       use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
         use: 'css-loader'
       })),
-    },]
+    },{
+        test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name]-[hash:8].[ext]'
+                },
+            },
+        ]
+    },],
     }
 };
