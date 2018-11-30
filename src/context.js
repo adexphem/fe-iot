@@ -18,11 +18,12 @@ const reducer = (state, action) => {
           }
         })},
       };
+
     case 'GET_DEVICE_READING':
       return {
         ...state,
         deviceList: action.payload,
-        heading: 'Search Result',
+        activeDeviceCode: [],
         activeDevice: 0,
         inactiveDevice: 0
       }
@@ -51,14 +52,20 @@ export class Provider extends Component {
     })
       .then(res => {
         let {data} = res.data;
-        const isActiveCount = data.filter(item => item.active === true).length;
+        let activeDeviceInfo = [];
+
+        data.forEach(item => {
+          if(item.active) activeDeviceInfo.push(item.name);
+        });
+
         this.setState({
           deviceList: res.data,
-          activeDevice: isActiveCount,
-          inactiveDevice: data.length - isActiveCount
+          activeDevice: activeDeviceInfo.length,
+          inactiveDevice: data.length - activeDeviceInfo.length,
+          activeDeviceCode: [...activeDeviceInfo]
         });
       })
-      .catch(error => console.log("Error ", error))
+      .catch()
   };
 
   render() {

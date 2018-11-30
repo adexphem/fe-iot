@@ -284,10 +284,25 @@ img {
   font-size: 15px;
 }
 
+.self-intro {
+  background: #FFFFFF;
+  padding: 120px 120px;
+  margin: 30px 0;
+  font-weight: 600;
+}
+
+.self-intro > div {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
 .footer {
   background: #000000;
   margin-top: 20px;
   color: #f5f5f5;
+  padding: 20px 0;
 }
 
 .footer .container {
