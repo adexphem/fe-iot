@@ -19,7 +19,6 @@ class Index extends Component {
         {
           value => {
             // check whether to display search result
-            console.log("value ---- ", value);
             let data = (value.searchResult) ? value.searchResult.data : value.deviceList.data;
             const isActiveCount = (data) ? data.filter(item => item.active === true).length : {};
             if(data) {

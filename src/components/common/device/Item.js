@@ -1,8 +1,11 @@
 import React from 'react';
 import Moment from 'react-moment';
 
+import device_status from '../../../assets/images/device_status.png';
+
 const Item = (props) => {
   const { item } = props;
+  
   return (
     <div className="col-md-6 transform5">
       <div className="card mb-4">
@@ -20,7 +23,7 @@ const Item = (props) => {
               <span className="tag">On</span>
               <span className="content date"><Moment format="MMM Do YYYY">{item.timestamp}</Moment></span>
             </div>
-            <div className='status'></div>
+            <div className={item.active ? "status active" : "status inactive"}><i><img src={device_status} /></i></div>
           </div>
         </div>
       </div>

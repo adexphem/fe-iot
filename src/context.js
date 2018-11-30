@@ -35,7 +35,7 @@ export class Provider extends Component {
   constructor() {
     super();
     this.state = {
-      deviceList: [],
+      deviceList: {},
       dispatch: action => this.setState(state => reducer(state, action)),
       activeDevice: 0,
       inactiveDevice: 0

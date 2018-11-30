@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Consumer } from '../context';
 
+import Status from './common/device/Status';
+
 class Search extends Component {
   searchTextRef = React.createRef();
 
@@ -10,7 +12,6 @@ class Search extends Component {
     this.state = {
       searchTitle: ''
     }
-
     this.onChange = this.onChange.bind(this);
   }
 
@@ -28,10 +29,11 @@ class Search extends Component {
       type: 'SEARCH_DATA',
       payload: this.state.searchTitle,
     });
+
+    this.setState({ searchTitle: ''});
   };
 
   render() {
-    const {activeDevice, inactiveDevice} = this.props;
     return (
       <Consumer>
         {value => {
@@ -55,11 +57,7 @@ class Search extends Component {
                   </div>
                 </form>
               </div>
-              <div className="device-status-info">
-                <span className="title">Device Status</span>
-                <span className="device-status-orientation active">{activeDevice} <i>Active</i></span>
-                <span className="device-status-orientation inactive">{inactiveDevice} <i>Inactive</i></span>
-              </div>
+              <Status deviceStatus={this.props} />
              </React.Fragment>
            );
         }}
