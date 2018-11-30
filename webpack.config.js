@@ -20,7 +20,7 @@ module.exports = {
     plugins: [
         new Dotenv({
             path: './.env', 
-            safe: false 
+            safe: true 
         }),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
